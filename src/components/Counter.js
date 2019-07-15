@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
 
-import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
-import {increment,decrement} from './redux/actions'
+class Counter extends React.Component {
 
-class App extends React.Component {
+  static propTypes = {
+    count:PropTypes.number.isRequired,
+    increment:PropTypes.func.isRequired,
+    decrement:PropTypes.func.isRequired
+  }
 
   increment = ()=> {
     const number = this.select.value*1;
@@ -40,7 +43,7 @@ class App extends React.Component {
   render(){
     const {count} = this.props;
     return (
-      <div className="App">
+      <div>
         <p>click {count} times</p>
         <div>
           <select ref={select => this.select = select}>
@@ -56,7 +59,6 @@ class App extends React.Component {
       </div>
     );
   }
-  
 }
 
-export default connect(state=>({count:state}),{increment,decrement})(App);
+export default Counter
